@@ -111,6 +111,25 @@ Las Tecnologías y Herramientas utilizadas fueron:
 -   Framework Haystack
 -   Framework Pytorch
 -   Framework Streamlit
+<br/>
+
+Para la creación de las imágenes Docker se debe ingresar a la carpeta a través del terminal y ejecutar el archivo setuo.sh mediante el comando: <br/>
+- sh setup.sh <br/>
+
+Y una vez terminada la creación de la imagen dependiendo de cuál sea se ejecutarán los siguientes comandos: <br/>
+- Iniciar imagen de la base de conocimiento Elasticsearch <br/>
+	- docker run -p 9200:9200 (imagenid) <br/>
+
+
+- Iniciar imagen del API <br/>
+	- ldocker run --gpus all -p 85:8080 -e es_ip='172.17.0.1' -e es_port=9200 (imagenid) <br/>
+ 		- es_ip y es_port: son el ip y puerto del contenedor de la base de conocimiento. <br/>
+ 
+- Iniciar imagen de la interfaz <br/>
+	- docker run -p 80:8080 -e qa_ip='172.17.0.1' -e qa_port=85  (imagenid) <br/>
+ 		- es_ip y es_port: son el ip y puerto del contenedor del API. <br/>
+
+
 
 ## Información adicional
 ---
