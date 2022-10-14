@@ -114,7 +114,7 @@ Las Tecnologías y Herramientas utilizadas fueron:
 
 ## Información adicional
 ---
-CORD-19: https://github.com/allenai/cord19
-Haystack: https://github.com/deepset-ai/haystack
-ElasticSearch: https://www.elastic.co/es/
-Docker: https://www.docker.com/
+CORD-19: https://github.com/allenai/cord19 <br/>
+Haystack: https://github.com/deepset-ai/haystack <br/>
+ElasticSearch: https://www.elastic.co/es/ <br/>
+Docker: https://www.docker.com/ <br/>
