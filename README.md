@@ -110,6 +110,10 @@ Y una vez terminada la creación de la imagen dependiendo de cuál sea se ejecut
 	- docker run -p 80:8080 -e qa_ip='172.17.0.1' -e qa_port=85  (imagenid) <br/>
  		- es_ip y es_port: son el ip y puerto del contenedor del API. <br/>
 
+Las imagenes ya creadas se las puede encontrar en los siguientes enlaces:
+- Imagen de la base de conocimiento: https://hub.docker.com/repository/docker/yamil75/elasticbase
+- Imagen del API:https://hub.docker.com/repository/docker/yamil75/apigpu 
+- Imagen de la interfaz: https://hub.docker.com/repository/docker/yamil75/interfaz_streamlit
 
 ## Guía de usuario
 ---
