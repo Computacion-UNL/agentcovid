@@ -112,7 +112,7 @@ Y una vez terminada la creación de la imagen dependiendo de cuál sea se ejecut
 
 Las imagenes ya creadas se las puede encontrar en los siguientes enlaces:
 - Imagen de la base de conocimiento: https://hub.docker.com/repository/docker/yamil75/elasticbase
-- Imagen del API:https://hub.docker.com/repository/docker/yamil75/apigpu 
+- Imagen del API: https://hub.docker.com/repository/docker/yamil75/apigpu 
 - Imagen de la interfaz: https://hub.docker.com/repository/docker/yamil75/interfaz_streamlit
 
 ## Guía de usuario
