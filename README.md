@@ -1,17 +1,19 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/33547749/195964318-e2ebf200-8881-4448-8be5-d2475b88c6fd.png"/></p> 
 
 
+
 ## Tabla de contenidos:
 ---
 - [Autores](#autores)
 - [Introducción](#introduccion)
-- [Desarrollo](#desarrollo)
+- [Desarrollo:](#desarrollo)
   - [Ajuste del modelo](#ajuste-del-modelo)
   - [Base de conocimiento](#base-de-conocimiento)
   - [Arquitectura del Agente](#arquitectura-del-agente)
   - [Creación de la API](#creación-de-la-api)
   - [Interfaz](#interfaz)
 - [Guía de instalación](#guía-de-instalación)
+- [Guía de usuario](#guía-de-usuario)
 - [Información adicional](#información-adicional)
 
 ## Autores
@@ -32,6 +34,7 @@ El objetivo del Agente Conversacional es dar Respuestas a preguntas relacionadas
 ---
 Para el afinado del modelo se utilizó la herramienta Google Colab, ya que permite la utilización de GPU’s con mejores características que las que se poseía. Cada archivo json de entrenamiento está estructurado con una serie de preguntas, respuestas, contexto, y la posición inicial de la respuesta en el contexto. (Los contextos se pueden repitir ya que pueden existir varias preguntas por contexto).
 Primero, se obtiene la posición de la respuesta en el pasaje (se nos da la posición inicial en el json) y con ella calculamos la posición final de la respuesta.
+
  ![image](https://user-images.githubusercontent.com/33547749/159567671-47c105d7-3b39-48ed-9bc7-19e735f6544d.png) <br/>
 
 A continuación, debemos convertir las posiciones de inicio y fin de la respuesta en posiciones de inicio y fin de token.
@@ -86,49 +89,45 @@ Finalmente se codifico la parte de la interfaz, la cual se la codifico con la li
 
 El resultado final de este proyecto lo puede ver <A HREF="http://34.171.25.128:8080/"> aqui. </A>
 
-## Guía de usuario
----
-Para ingresar al módulo de software solicitar la dirección url al correo: direccion.cis@unl.edu.ec o su vez a los autores.
-<br/><br/>
-Para acceder al manual de usuario (Gestor de la CIS/C, Consejo Consultivo) del módulo de software ingrese al siguiente enlace: https://drive.google.com/file/d/1Y9z8aw7zdjAzlMk6PyCScE7vufUZq8kJ/view?usp=sharing
-<br/><br/>
-Para acceder al manual de usuario (Docente) del módulo de software ingrese al siguiente enlace: https://drive.google.com/file/d/1r1TRm8-9pcTBHBRKUgvfWdWCE0g2GIuK/view?usp=sharing
-
  	
 ## Guía de instalación
 ---
-Para comenzar con la instalación del software se recomienda emplear Docker para un despliegue rápido y adecuado, además de una GPU Nvidia mayor a 4 GB de RAM, Almacenamiento mínimo de XX GB y memoria RAM mínima de 6 GB.
-<br/>
-
-Las Tecnologías y Herramientas utilizadas fueron:
--   Plataforma de Microsoft Azure
--   Plataforma de Google Cloud
--   Plataforma de Google Colaboratory
--   Sistema Operativo Centos 7
--   Lenguaje de Programación Pyhton versión > 3.6
--   Gestor de Base de Datos: ElasticSearch
--   Framework Haystack
--   Framework Pytorch
--   Framework Streamlit
+Para comenzar con la instalación del software se recomienda emplear Docker para un despliegue rápido y adecuado, además de una GPU Nvidia mayor a 4 GB de RAM, almacenamiento mínimo de 7 GB y memoria RAM mayor a 6 GB.
 <br/>
 
 Para la creación de las imágenes Docker se debe ingresar a la carpeta a través del terminal y ejecutar el archivo setuo.sh mediante el comando: <br/>
 - sh setup.sh <br/>
 
 Y una vez terminada la creación de la imagen dependiendo de cuál sea se ejecutarán los siguientes comandos: <br/>
-- Iniciar imagen de la base de conocimiento Elasticsearch <br/>
+- Iniciar imagen de la base de conocimiento Elasticsearch, en el puerto 9200. <br/>
 	- docker run -p 9200:9200 (imagenid) <br/>
 
-
-- Iniciar imagen del API <br/>
+- Iniciar imagen del API, en el puerto 85. <br/>
 	- ldocker run --gpus all -p 85:8080 -e es_ip='172.17.0.1' -e es_port=9200 (imagenid) <br/>
  		- es_ip y es_port: son el ip y puerto del contenedor de la base de conocimiento. <br/>
  
-- Iniciar imagen de la interfaz <br/>
+- Iniciar imagen de la interfaz  <br/>
 	- docker run -p 80:8080 -e qa_ip='172.17.0.1' -e qa_port=85  (imagenid) <br/>
  		- es_ip y es_port: son el ip y puerto del contenedor del API. <br/>
 
 
+## Guía de usuario
+---
+El Agente Conversacional Covid-19, se carácteriza por tener un menú desplegable superior en la parte izquierda, el cúal ofrece una sección de "Opciones", que se compone de:  <br/>
+
+Selección del tipo de búsqueda: 
+  - Normal: Esta búsqueda se realiza en dentro de todos los documentos de la base de conocimiento y extrae los 5 documentos con mayor coincidencia en base a los contextos de la pregunta realizada y devuelve el la mejor respuesta junto con su contexto de donde fue extraida gracias al modelo ajustado. Está búsqueda es más superficial pero ofrece buenas respuestas y en un tiempo relativamente corto.
+  - Avanzada: Esta búsqueda se realiza en dentro de todos los documentos de la base de conocimiento y extrae los 10 documentos con mayor coincidencia en base a los contextos de la pregunta realizada y devuelve el la mejor respuesta junto con su contexto de donde fue extraida gracias al modelo ajustado. Está búsqueda es más profunda al buscar en el doble de documentos, pero el tiempo de procesamiento es mayor acorde al número de documentos que se procesan.  <br/>
+
+Selección del idioma: 
+\* Cabe mencionar que el modelo trabaja bajo el idioma inglés y para poder tomar y ofrecer respuestas en español se empleó una libreria para la traducción. *
+  - Español: Se traducen las preguntas y respuestas, al emplear una libreria la traducción puede dar lugar a sesgos.
+  - Inglés: Ofrece respuestas en este idioma, las cuales son obtenidas directamente de los documentos científicos consultados. 
+  - Información del Agente:  Se describe brevemente el funcionamiento y el enlace al repositorio del proyecto de titulación. <br/>
+
+Página principal:
+  - Cuadro de búsqueda: para poder introduccir las preguntas relacionadas con el Covid-19.
+  - Cuadro de resultado: expone la respuesta encontrada.
 
 ## Información adicional
 ---
@@ -136,3 +135,15 @@ CORD-19: https://github.com/allenai/cord19 <br/>
 Haystack: https://github.com/deepset-ai/haystack <br/>
 ElasticSearch: https://www.elastic.co/es/ <br/>
 Docker: https://www.docker.com/ <br/>
+
+Las Tecnologías y Herramientas utilizadas fueron:
+ - Plataforma de Microsoft Azure
+ - Plataforma de Google Cloud
+ - Plataforma de Google Colaboratory
+ - Sistema Operativo Centos 7
+ - Lenguaje de Programación Pyhton versión > 3.6
+ - Gestor de Base de Datos: ElasticSearch
+ - Framework Haystack
+ - Framework Pytorch
+ - Framework Streamlit
+<br/>
