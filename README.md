@@ -1,6 +1,5 @@
-<p align="center"> UNIVERSIDAD NACIONAL DE LOJA</p>
-<p align="center"><img src="https://pbs.twimg.com/profile_images/1225522326487347211/FaNm0ISf_400x400.jpg" width="150" height="150"/></p> 
-<h1 align="center"> "Agente virtual para brindar asistencia acerca del Covid-19" </h1>
+<p align="center"><img src="https://user-images.githubusercontent.com/33547749/195964318-e2ebf200-8881-4448-8be5-d2475b88c6fd.png"/></p> 
+
 
 ## Tabla de contenidos:
 ---
